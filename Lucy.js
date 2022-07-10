@@ -242,7 +242,7 @@ break
 
 case 'descricao':
 if(!isGroup) return enviar(msg.grupo)
-if(!isCriador) return enviar(msg.dono)
+if(!isAdmins && !isCriador) return enviar(msg.dono)
 if(!q) return enviar('Qual a descrição?')
 fairy.groupUpdateDescription(from,`${q}`)
 enviar(`Descricao do grupo alterado por *_${pushname}_*`)
