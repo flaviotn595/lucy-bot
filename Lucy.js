@@ -130,6 +130,7 @@ const pushname = mek.pushName ? mek.pushName: `${Lucy}`
 const groupMembers = isGroup ? groupMetadata.participants : ''
 const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : ''
 const isGroupAdmins = groupAdmins.includes(sender) || false
+const isAdmins = m.isGroup ? groupAdmins.includes(sender) : false
 const isBotGroupAdmins = getGroupAdmins(sender) || false
 const groupDesc = isGroup ? groupMetadata.desc : ''
 // linguagem de grupo
