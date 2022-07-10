@@ -29,6 +29,10 @@ const {
        getGroupAdmins
 } = require('./lib/função/functions')
 
+const {
+	   execSync
+} = require("child_process")
+
 // LIB ONDE ESTA O MENU
 const { menu } = require('./lib/menus/menu')
 const { yta, ytv } = require('./lib/y2mate')
@@ -293,12 +297,40 @@ break
 
 case 'mp4':{
 let { ytv } = require('./lib/y2mate')
-let quality = args[1] ? args[1] : '480p'
+let quality = args[1] ? args[1] : '1080p'
 let media = await ytv(text, quality)
 if (media.filesize >= 100000) return enviar('Arquivo acima do limite '+util.format(media))
 fairy.sendMessage(from, { video: { url: media.dl_link }, mimetype: 'video/mp4'}, { quoted: mek })
 }
 break
+
+// ARIA DE ATUALIZAÇÃO
+
+case 'update': {
+if(!isCriador) return enviar(msg.dono)
+update = execSync('git remote set-url origin https://github.com/flaviotn595/lucy-bot.git && git pull')
+enviar(update.toString())
+}
+break
+
+case 'speedtest': {
+enviar('Velocidade da internet...')
+let cp = require('child_process')
+let { promisify } = require('util')
+let exec = promisify(cp.exec).bind(cp)
+let o
+try {
+o = await exec('python speed.py')
+} catch (e) {
+o = e
+} finally {
+let { stdout, stderr } = o
+if (stdout.trim()) enviar(stdout)
+if (stderr.trim()) emviar(stderr)
+}
+}
+break
+
 //COMANDOS
 
 default: 

@@ -6,6 +6,7 @@
     "cfonts": "^3.1.1",
     "jsdom": "^20.0.0",
     "chalk": "^5.0.1",
+    "child_process": "^1.0.2",
     "color-convert": "^2.0.1",
     "tough-cookie": "^4.0.0",
     "fs": "0.0.1-security",
