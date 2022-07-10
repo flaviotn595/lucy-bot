@@ -1,6 +1,20 @@
 {
   "dependencies": {
-    "github:adiwajshing/baileys": "^",
-    "chalk": "^5.0.1"
+    "@adiwajshing/baileys": "^4.0.1",
+    "@adiwajshing/keyed-db": "^0.2.4",
+    "ansi-styles": "^6.1.0",
+    "cfonts": "^3.1.1",
+    "jsdom": "^20.0.0",
+    "chalk": "^5.0.1",
+    "color-convert": "^2.0.1",
+    "tough-cookie": "^4.0.0",
+    "fs": "0.0.1-security",
+    "yt-search": "^2.10.3",
+    "jsdom": "^20.0.0",
+    "moment-timezone": "^0.5.34",
+    "os": "^0.1.2",
+    "performance-now": "^2.1.0",
+    "pino": "^7.0.5",
+    "qrcode-terminal": "^0.12.0"
   }
 }
