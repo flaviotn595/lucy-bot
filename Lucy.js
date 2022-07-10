@@ -326,7 +326,7 @@ o = e
 } finally {
 let { stdout, stderr } = o
 if (stdout.trim()) enviar(stdout)
-if (stderr.trim()) emviar(stderr)
+if (stderr.trim()) enviar(stderr)
 }
 }
 break
