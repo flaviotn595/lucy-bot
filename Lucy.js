@@ -241,12 +241,8 @@ enviar(`Nome do grupo alterado por *_${pushname}_*`)
 break
 
 case 'descricao':
-case 'descricao':
-if (!m.isGroup) return enviar(msg.grupo)
-if(!q) return enviar('Qual a descrição?')
-fairy.groupUpdateDescription(from,`${q}`)
-enviar(`Descricao do grupo alterado por *_${pushname}_*`)
-break
+if(!isGroup) return enviar(msg.grupo)
+if(!isCriador) return enviar(msg.dono)
 if(!q) return enviar('Qual a descrição?')
 fairy.groupUpdateDescription(from,`${q}`)
 enviar(`Descricao do grupo alterado por *_${pushname}_*`)
