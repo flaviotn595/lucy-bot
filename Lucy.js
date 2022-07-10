@@ -241,16 +241,18 @@ enviar(`Nome do grupo alterado por *_${pushname}_*`)
 break
 
 case 'descricao':
-if(!isGroup) return enviar(msg.grupo)
-if(!isCriador) return enviar(msg.dono)
+if (!m.isGroup) return enviar(msg.grupo)
+if (!isBotAdmins) return enviar(msg.bot)
+if (!isAdmins && !isCreator) return enviar(msg.adm)
 if(!q) return enviar('Qual a descrição?')
 fairy.groupUpdateDescription(from,`${q}`)
 enviar(`Descricao do grupo alterado por *_${pushname}_*`)
 break
 
 case 'sair':
-if(!isGroup) return enviar(msg.grupo)
-if(!isCriador) return enviar(msg.dono)
+if (!m.isGroup) return enviar(msg.grupo)
+if (!isBotAdmins) return enviar(msg.bot)
+if (!isAdmins && !isCreator) return enviar(msg.adm)
 fairy.groupLeave(from) 
 break
 //GRUPO
@@ -310,24 +312,6 @@ case 'update': {
 if(!isCriador) return enviar(msg.dono)
 update = execSync('git remote set-url origin https://github.com/flaviotn595/lucy-bot.git && git pull')
 enviar(update.toString())
-}
-break
-
-case 'speedtest': {
-enviar('Velocidade da internet...')
-let cp = require('child_process')
-let { promisify } = require('util')
-let exec = promisify(cp.exec).bind(cp)
-let o
-try {
-o = await exec('python speed.py')
-} catch (e) {
-o = e
-} finally {
-let { stdout, stderr } = o
-if (stdout.trim()) enviar(stdout)
-if (stderr.trim()) enviar(stderr)
-}
 }
 break
 
