@@ -36,7 +36,7 @@ const {
 // LIB ONDE ESTA O MENU
 const { menu } = require('./lib/menus/menu')
 const { yta, ytv } = require('./lib/y2mate')
-const { yta, ytv } = require('./lib/y2mate2')
+const { ytaa, ytvv } = require('./lib/y2mate2')
 
 // VCARD DE CONTADO
 const vcard =
@@ -307,7 +307,7 @@ fairy.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg'}
 break
 
 case '2':{
-let { ytv } = require('./lib/y2mate2')
+let { ytvv } = require('./lib/y2mate2')
 let quality = args[1] ? args[1] : '1440p'
 let media = await ytv(text, quality)
 if (media.filesize >= 100000) return enviar('Arquivo acima do limite '+util.format(media))
