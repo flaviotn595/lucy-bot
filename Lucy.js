@@ -165,14 +165,6 @@ const isCriador = dono.includes(sender)
 // selo sei nem pq coloquei bagulho inútil kek
 const contato = {key : {participant : '0@s.whatsapp.net'},message: {contactMessage:{displayName: `${pushname}`}}}
 
-const reactionMessage = {
-        react: {
-            text: args[0],
-            key: { remoteJid: from, fromMe: true, id: quoted.id }
-                }
-            }
-                
-
 // IFS
 if(!isGroup && isCmd) console.log(
 color('「⸙ Cmd no Pv ⸙」','red'),'\n',
@@ -204,6 +196,14 @@ color('⸙Msg :','yellow'),color(budy,'cyan'),'\n',
 color('⸙Hora :','yellow'),color(hora,'cyan'),'\n',
 color('⸙Data :','yellow'),color(data,'cyan'),'\n')
 // IFS
+
+const reactionMessage = {
+                    react: {
+                        text: args[0],
+                        key: { remoteJid: from, fromMe: true, id: quoted.id }
+                    }
+                }
+                
 
 switch (comando) {
 
