@@ -141,6 +141,13 @@ const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
 /// MÉDIA ETC
 
+const reactionMessage = {
+react: {
+text: args[0],
+key: { remoteJid: from, fromMe: true, id: quoted.id }
+}
+}
+
 /// PING
 const cpus = os.cpus().map(cpu => {
 			cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
@@ -196,14 +203,6 @@ color('⸙Msg :','yellow'),color(budy,'cyan'),'\n',
 color('⸙Hora :','yellow'),color(hora,'cyan'),'\n',
 color('⸙Data :','yellow'),color(data,'cyan'),'\n')
 // IFS
-
-const reactionMessage = {
-                    react: {
-                        text: args[0],
-                        key: { remoteJid: from, fromMe: true, id: quoted.id }
-                    }
-                }
-                
 
 switch (comando) {
 
