@@ -308,7 +308,7 @@ break
 
 case '2':{
 let { ytvv } = require('./lib/y2mate2')
-let quality = args[1] ? args[1] : '1440p'
+let quality = args[1] ? args[1] : '1440p60'
 let media = await ytv(text, quality)
 if (media.filesize >= 100000) return enviar('Arquivo acima do limite '+util.format(media))
 fairy.sendMessage(from, { video: { url: media.dl_link }, mimetype: 'video/mp4'}, { quoted: mek })
