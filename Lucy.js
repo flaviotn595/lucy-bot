@@ -121,17 +121,6 @@ const isCmd = body.startsWith(p)
 const enviar = (text) => {fairy.sendMessage(from, {text: text}, { quoted: mek})}
 // strings
 
-// FUNÇÃO
-
-const reactionMessage = {
-                    react: {
-                        text: args[0],
-                        key: { remoteJid: m.chat, fromMe: true, id: quoted.id }
-                    }
-                }
-
-// FUNÇÃO 
-
 // linguagem de grupo
 const isGroup = from.endsWith("@g.us")
 const groupMetadata = isGroup ? await fairy.groupMetadata(from): ""
@@ -175,6 +164,14 @@ const isCriador = dono.includes(sender)
 
 // selo sei nem pq coloquei bagulho inútil kek
 const contato = {key : {participant : '0@s.whatsapp.net'},message: {contactMessage:{displayName: `${pushname}`}}}
+
+const reactionMessage = {
+        react: {
+            text: args[0],
+            key: { remoteJid: from, fromMe: true, id: quoted.id }
+                }
+            }
+                
 
 // IFS
 if(!isGroup && isCmd) console.log(
