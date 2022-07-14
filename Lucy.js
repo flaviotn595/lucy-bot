@@ -121,6 +121,17 @@ const isCmd = body.startsWith(p)
 const enviar = (text) => {fairy.sendMessage(from, {text: text}, { quoted: mek})}
 // strings
 
+// FUNÇÃO
+
+const reactionMessage = {
+react: {
+text: args[0], 
+key: { remoteJid: from, fromMe: true, id: quoted.id }
+}
+}
+
+// FUNÇÃO 
+
 // linguagem de grupo
 const isGroup = from.endsWith("@g.us")
 const groupMetadata = isGroup ? await fairy.groupMetadata(from): ""
