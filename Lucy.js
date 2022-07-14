@@ -223,13 +223,11 @@ case 'help':
 enviar('ola estou em teste')
 break
 
-case 'hentai':			
-try{
-enviar(mess.wait)
+case 'hentai':
+enviar(msg.dono)
 resultado = await fetchJson(`https://myselfff.herokuapp.com/docs/nsfw/${q}`)
 analise = await getBuffer(resultado.result)
 fairy.sendMessage(from, {image:analise},{quoted:mek})
-} catch (e) {error("Error")}	
 break
 
 case 'mediafire': {
