@@ -36,6 +36,8 @@ const {
 // LIB ONDE ESTA O MENU
 const { menu } = require('./lib/menus/menu')
 const { yta, ytv } = require('./lib/y2mate')
+const { hentai } = require('./lib/scraper2.js')
+const { mediafireDl } = require('./lib/mediafire.js')
 const { ytaa, ytvv } = require('./lib/y2mate2')
 
 // VCARD DE CONTADO
@@ -220,6 +222,31 @@ break
 case 'help':
 enviar('ola estou em teste')
 break
+
+case 'hentai':			
+try{
+enviar(mess.wait)
+resultado = await fetchJson(`https://myselfff.herokuapp.com/docs/nsfw/${q}`)
+analise = await getBuffer(resultado.result)
+fairy.sendMessage(from, {image:analise},{quoted:mek})
+} catch (e) {error("Error")}	
+break
+
+case 'mediafire': {
+if (!text) return enviar(mess.linkm)
+if (!isUrl(args[0]) && !args[0].includes('mediafire.com')) return enviar(`O link que você forneceu é inválido`)
+const testando = await mediafireDl(text)
+if (testando[0].size.split('MB')[0] >= 999) return enviar('*Arquivo acima do limite* '+util.format(testando))
+const result4 = `*MEDIAFIRE DOWNLOADER*
+				
+*Nome* : ${testando[0].nama}
+*Tamanho* : ${testando[0].size}
+*Mímico* : ${testando[0].mime}
+*Link* : ${testando[0].link}`
+enviar(`${result4}`)
+fairy.sendMessage(from, { document : { url : testando[0].link}, fileName : testando[0].nama, mimetype: testando[0].mime }, { quoted : mek }).catch ((err) => enviar(mess.error))
+}
+breakbreak
 
 //////////////////////////////////////////////
 
