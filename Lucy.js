@@ -32,6 +32,23 @@ const {
 const {
 	   execSync
 } = require("child_process")
+const { 
+      smsg, 
+      formatp, 
+      tanggal, 
+      formatDate, 
+      getTime, 
+      isUrl, 
+      sleep, 
+      clockString, 
+      runtime, 
+      fetchJson, 
+      getBuffer, 
+      jsonformat, 
+      format, 
+      parseMention, 
+      getRandom 
+} = require('./lib/myfunc')
 
 // LIB ONDE ESTA O MENU
 const { menu } = require('./lib/menus/menu')
