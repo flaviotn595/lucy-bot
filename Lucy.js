@@ -216,7 +216,8 @@ let latensi = speed() - timestamp
 enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
 break
 
-case 'reagir': { 
+case 'reagir': {
+if(!isGroup) return enviar(msg.grupo)
 fairy.sendMessage(from, reactionMessage)} 
 break
 
