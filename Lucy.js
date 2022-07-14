@@ -124,11 +124,11 @@ const enviar = (text) => {fairy.sendMessage(from, {text: text}, { quoted: mek})}
 // FUNÇÃO
 
 const reactionMessage = {
-react: {
-text: args[0], 
-key: { remoteJid: from, fromMe: true, id: quoted.id }
-}
-}
+                    react: {
+                        text: args[0],
+                        key: { remoteJid: m.chat, fromMe: true, id: quoted.id }
+                    }
+                }
 
 // FUNÇÃO 
 
