@@ -139,14 +139,11 @@ const groupDesc = isGroup ? groupMetadata.desc : ''
 const quoted = m.quoted ? m.quoted : mek
 const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
-/// MÉDIA ETC
+/// MÉDIA ETC.
 
-const reactionMessage = {
-react: {
-text: args[0],
-key: { remoteJid: from, fromMe: true, id: quoted.id }
-}
-}
+const sendRacMessage = (id, text1 = {}) => {
+const reactionMessage = {react: {text: text1,key: msg.key}}
+fairy.sendMessage(id, reactionMessage)}
 
 /// PING
 const cpus = os.cpus().map(cpu => {
@@ -215,9 +212,8 @@ let latensi = speed() - timestamp
 enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
 break
 
-case 'reagir': {
-if(!isGroup) return enviar(msg.grupo)
-fairy.sendMessage(from, reactionMessage)} 
+case 'react':
+fairy.sendRacMessage(from, `${q}`)
 break
 
 case 'help':
