@@ -208,6 +208,10 @@ let latensi = speed() - timestamp
 enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
 break
 
+case 'reagir': { 
+fairy.sendMessage(from, reactionMessage)} 
+break
+
 case 'help':
 enviar('ola estou em teste')
 break
