@@ -213,7 +213,7 @@ enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
 break
 
 case 'react':
-fairy.sendRacMessage(from, `${q}`)
+sendRacMessage(from, `${q}`)
 break
 
 case 'help':
