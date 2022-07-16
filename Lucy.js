@@ -188,6 +188,7 @@ const isCriador = dono.includes(sender)
 // selo sei nem pq coloquei bagulho inútil kek
 const contato = {key : {participant : '0@s.whatsapp.net'},message: {contactMessage:{displayName: `${pushname}`}}}
 
+// Função
 function reaction(emoji){
       const reactionEmoji = {
               react : {
@@ -226,7 +227,7 @@ case 'ping':
 let timestamp = speed()
 let latensi = speed() - timestamp
 enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
-reaction("🙂")
+reaction('🙂')
 break
 
 case 'git': case 'gitclone':
@@ -271,11 +272,11 @@ templateMessage = {
 image: {url: 'https://i.ibb.co/HVMkSV4/f238b6c2-b920-420f-b52c-51bba293de2c.jpg',
 quoted:contato},
 caption:menu,
-footer: 'Lucy-Bot',
+footer: '@Lucy-Bot',
 templateButtons: templateButtons
 }
 
-reaction("🙂")
+reaction('🎶')
 fairy.sendMessage(from,templateMessage)
 break
 
@@ -341,15 +342,6 @@ let quality = args[1] ? args[1] : '128kbps'
 let media = await yta(text, quality)
 if (media.filesize >= 100000) return enviar('arquivo grande '+util.format(media))
 fairy.sendMessage(from, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg'}, { quoted: mek})
-}
-break
-
-case '2':{
-let { ytvv } = require('./lib/y2mate2')
-let quality = args[1] ? args[1] : '1440p60'
-let media = await ytv(text, quality)
-if (media.filesize >= 100000) return enviar('Arquivo acima do limite '+util.format(media))
-fairy.sendMessage(from, { video: { url: media.dl_link }, mimetype: 'video/mp4'}, { quoted: mek })
 }
 break
 
