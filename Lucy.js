@@ -10,6 +10,7 @@ const criador = "GhostJs"
 const fs = require('fs');
 const os= require('os');
 const Pino = require('pino');
+const axios = require('axios')
 const yts = require('yt-search');
 const cfonts = require('cfonts');
 const speed = require('performance-now');
@@ -53,9 +54,7 @@ const {
 // LIB ONDE ESTA O MENU
 const { menu } = require('./lib/menus/menu')
 const { yta, ytv } = require('./lib/y2mate')
-const { hentai } = require('./lib/scraper2.js')
 const { mediafireDl } = require('./lib/mediafire.js')
-const { ytaa, ytvv } = require('./lib/y2mate2')
 
 // VCARD DE CONTADO
 const vcard =
@@ -139,6 +138,9 @@ const text = q = args.join(" ")
 const comando = body.slice(1).trim().split(/ +/).shift().toLowerCase()
 const isCmd = body.startsWith(p)
 const enviar = (text) => {fairy.sendMessage(from, {text: text}, { quoted: mek})}
+const sendRacMessage = (id, text1 = {}) => {
+const reactionMessage = {react: {text: text1,key: msg.key}}
+fairy.sendMessage(id, reactionMessage)}
 // strings
 
 // linguagem de grupo
@@ -161,10 +163,6 @@ const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
 /// MÉDIA ETC.
 
-const sendRacMessage = (id, text1 = {}) => {
-const reactionMessage = {react: {text: text1,key: msg.key}}
-fairy.sendMessage(id, reactionMessage)}
-
 /// PING
 const cpus = os.cpus().map(cpu => {
 			cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
@@ -186,21 +184,26 @@ const cpu = cpus.reduce((last, cpu, _, {
 const dono = `${numero}@s.whatsapp.net`
 const isCriador = dono.includes(sender)
 
+
 // selo sei nem pq coloquei bagulho inútil kek
 const contato = {key : {participant : '0@s.whatsapp.net'},message: {contactMessage:{displayName: `${pushname}`}}}
+
+function reaction(emoji){
+      const reactionEmoji = {
+              react : {
+                      text: emoji,
+                      key: msg.key
+              }
+     }
+    fairy.sendMessage(from, reactionEmoji)
+
+}
 
 // IFS
 if(!isGroup && isCmd) console.log(
 color('「⸙ Cmd no Pv ⸙」','red'),'\n',
 color('⸙Nome :','yellow'),color(pushname,'cyan'),'\n',
 color('⸙Cmd :','yellow'),color(comando,'cyan'),'\n',
-color('⸙Hora :','yellow'),color(hora,'cyan'),'\n',
-color('⸙Data :','yellow'),color(data,'cyan'),'\n')
-
-if(!isCmd && !isGroup) console.log(
-color('「⸙ Msg em Pv ⸙」','red'),'\n',
-color('⸙Nome :','yellow'),color(pushname,'cyan'),'\n',
-color('⸙Msg :','yellow'),color(budy,'cyan'),'\n',
 color('⸙Hora :','yellow'),color(hora,'cyan'),'\n',
 color('⸙Data :','yellow'),color(data,'cyan'),'\n')
 
@@ -212,13 +215,6 @@ color('⸙Cmd :','yellow'),color(comando,'cyan'),'\n',
 color('⸙Hora :','yellow'),color(hora,'cyan'),'\n',
 color('⸙Data :','yellow'),color(data,'cyan'),'\n')
 
-if(!isCmd && isGroup) console.log(
-color('「⸙ Msg em Gp ⸙」','red'),'\n',
-color('⸙Grupo :','yellow'),color(groupName,'cyan'),'\n',
-color('⸙Nome :','yellow'),color(pushname,'cyan'),'\n',
-color('⸙Msg :','yellow'),color(budy,'cyan'),'\n',
-color('⸙Hora :','yellow'),color(hora,'cyan'),'\n',
-color('⸙Data :','yellow'),color(data,'cyan'),'\n')
 // IFS
 
 switch (comando) {
@@ -230,25 +226,23 @@ case 'ping':
 let timestamp = speed()
 let latensi = speed() - timestamp
 enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
+reaction("🙂")
 break
 
-case 'react':
-sendRacMessage(from, `${q}`)
-break
-
-case 'help':
-enviar('ola estou em teste')
-break
-
-case 'hentai':
-enviar(msg.dono)
-resultado = await fetchJson(`https://myselfff.herokuapp.com/docs/nsfw/${q}`)
-analise = await getBuffer(resultado.result)
-fairy.sendMessage(from, {image:analise},{quoted:mek})
-break
+case 'git': case 'gitclone':
+           enviar(msg.aguarde)
+            let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
+            if (!args[0]) reply(`Use ${prefix}gitclone link do repo\nExemplo: https://github.com/flaviotn595/lucy-bot.git`)
+    if (!regex1.test(args[0])) return enviar(msg.aguarde)
+    let [, user, repo] = args[0].match(regex1) || []
+    repo = repo.replace(/.git$/, '')
+    let url = `https://api.github.com/repos/${user}/${repo}/zipball`
+    let filename = (await fetch(url, {method: 'HEAD'})).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
+    fairy.sendMessage(from, { document: { url: url }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: mek }).catch((err) => enviar(msg.error))
+			break
 
 case 'mediafire': {
-if (!text) return enviar(mess.linkm)
+if (!text) return enviar(msg.dono)
 if (!isUrl(args[0]) && !args[0].includes('mediafire.com')) return enviar(`O link que você forneceu é inválido`)
 const testando = await mediafireDl(text)
 if (testando[0].size.split('MB')[0] >= 999) return enviar('*Arquivo acima do limite* '+util.format(testando))
@@ -256,12 +250,12 @@ const result4 = `*MEDIAFIRE DOWNLOADER*
 				
 *Nome* : ${testando[0].nama}
 *Tamanho* : ${testando[0].size}
-*Mímico* : ${testando[0].mime}
+*Tipo* : ${testando[0].mime}
 *Link* : ${testando[0].link}`
 enviar(`${result4}`)
 fairy.sendMessage(from, { document : { url : testando[0].link}, fileName : testando[0].nama, mimetype: testando[0].mime }, { quoted : mek }).catch ((err) => enviar(mess.error))
 }
-breakbreak
+break
 
 //////////////////////////////////////////////
 
@@ -280,6 +274,8 @@ caption:menu,
 footer: 'Lucy-Bot',
 templateButtons: templateButtons
 }
+
+reaction("🙂")
 fairy.sendMessage(from,templateMessage)
 break
 
