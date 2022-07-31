@@ -180,10 +180,6 @@ const cpu = cpus.reduce((last, cpu, _, {
 		})
 ///PING
 
-// inclusões
-const dono = `${numero}@s.whatsapp.net`
-const isCriador = dono.includes(sender)
-
 
 // selo sei nem pq coloquei bagulho inútil kek
 const contato = {key : {participant : '0@s.whatsapp.net'},message: {contactMessage:{displayName: `${pushname}`}}}
@@ -199,6 +195,9 @@ function reaction(emoji){
     fairy.sendMessage(from, reactionEmoji)
 
 }
+
+const dono = `${numero}@s.whatsapp.net`
+const isCriador = dono.includes(sender)
 
 // IFS
 if(!isGroup && isCmd) console.log(
