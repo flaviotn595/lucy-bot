@@ -226,7 +226,6 @@ case 'ping':
 let timestamp = speed()
 let latensi = speed() - timestamp
 enviar(`Respondendo em ${latensi.toFixed(4)} Segundo`)
-reaction('🙂')
 break
 
 case 'git': case 'gitclone':
@@ -274,8 +273,6 @@ caption:menu,
 footer: '@Lucy-Bot',
 templateButtons: templateButtons
 }
-
-reaction('🎶')
 fairy.sendMessage(from,templateMessage)
 break
 
